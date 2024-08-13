@@ -1,0 +1,72 @@
+h1 {
+    color: red;
+}
+
+.Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    width: 100dvh;
+    border: 1px solid black;
+    margin: auto;
+}
+.header{
+    color: white;
+    text-align: center;
+}
+
+:root {
+    --background-color: rgb(255, 255, 255);
+    --text-color: black;
+}
+
+body.dark-mode {
+    --background-color: black;
+    --text-color: white;
+}
+
+body {
+    background: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+}
+
+.Container {
+    background: var(--background-color);
+}
+
+.header, footer {
+    color: var(--text-color);
+}
+
+.Toogle {
+    cursor: pointer;
+    background-color: white;
+    width: fit-content;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    float: right;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+}
+
+.Toogle:hover {
+    background-color: #f0f0f0;
+}
+
+.material-symbols-outlined {
+    margin-left: 5px;
+}
+
+.Footer-Container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    margin: 0px;
+    padding: 0px;
+}
