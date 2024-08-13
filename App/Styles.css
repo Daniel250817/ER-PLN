@@ -1,5 +1,8 @@
 h1 {
-    color: red;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+p {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .Container {
@@ -14,6 +17,15 @@ h1 {
 .header{
     color: white;
     text-align: center;
+    background: rgb(235, 235, 235);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    height: 9dvh;
+    justify-content: center ;
+    align-items: center;
+    display: flex;
+    background: var(--background-color);
+    color: var(--text-color);
+
 }
 
 :root {
@@ -22,7 +34,7 @@ h1 {
 }
 
 body.dark-mode {
-    --background-color: black;
+    --background-color: rgb(1, 4, 29);
     --text-color: white;
 }
 
@@ -69,4 +81,10 @@ body {
     color: white;
     margin: 0px;
     padding: 0px;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
