@@ -2,7 +2,13 @@
 function getDbConnection() {
     $servername = "localhost";
     $username = "root";
-    $password = "mysql250817";
+    // Obtener la contraseña desde la variable de entorno
+    $password = getenv('ContraMysql');
+
+    if ($password === false) {
+        die('Error: La variable de entorno ContraMysql no está definida.');
+    }
+
     $dbname = "ER_PLN";
     $port = 3306;
 
