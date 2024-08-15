@@ -1,7 +1,7 @@
 // Crear el escenario
 var stage = new Konva.Stage({
     container: 'canvas-container', // ID del contenedor
-    width: window.innerWidth/2, // Ajusta el tamaño según sea necesario
+    width: window.innerWidth / 2, // Ajusta el tamaño según sea necesario
     height: window.innerHeight
 });
 
@@ -54,26 +54,41 @@ function drawDottedLine(x1, y1, x2, y2) {
     return line;
 }
 
-// Crear algunas "tablas"
-var table1 = createTable(50, 50, 'Tabla 1');
-var table2 = createTable(200, 50, 'Tabla 2');
-var table3 = createTable(350, 50, 'Tabla 3');
+// Obtener entidades de la base de datos
+fetch('http://localhost:3000/App/ConectionBD/Fetch/Connection.php') // Ajusta esta URL según la ubicación de tu archivo PHP
+    .then(response => response.json())
+    .then(entidades => {
+        var tables = [];
+        var startX = 50;
+        var startY = 50;
+        var spacingX = 150; // Espacio horizontal entre tablas
 
-// Dibujar líneas punteadas entre las tablas
-var line1 = drawDottedLine(table1.x() + 100, table1.y() + 25, table2.x(), table2.y() + 25);
-var line2 = drawDottedLine(table2.x() + 100, table2.y() + 25, table3.x(), table3.y() + 25);
+        entidades.forEach((entidad, index) => {
+            var table = createTable(startX + index * spacingX, startY, entidad.Entidades); // Ajusta según el nombre del campo
+            tables.push(table);
+        });
 
-// Función para actualizar las líneas
-function updateLines() {
-    line1.points([table1.x() + 100, table1.y() + 25, table2.x(), table2.y() + 25]);
-    line2.points([table2.x() + 100, table2.y() + 25, table3.x(), table3.y() + 25]);
-    layer.batchDraw();
-}
+        // Dibujar líneas punteadas entre las tablas
+        var lines = [];
+        for (var i = 0; i < tables.length - 1; i++) {
+            var line = drawDottedLine(tables[i].x() + 100, tables[i].y() + 25, tables[i + 1].x(), tables[i + 1].y() + 25);
+            lines.push(line);
+        }
 
-// Agregar eventos de arrastre a las tablas
-table1.on('dragmove', updateLines);
-table2.on('dragmove', updateLines);
-table3.on('dragmove', updateLines);
+        // Función para actualizar las líneas
+        function updateLines() {
+            for (var i = 0; i < lines.length; i++) {
+                lines[i].points([tables[i].x() + 100, tables[i].y() + 25, tables[i + 1].x(), tables[i + 1].y() + 25]);
+            }
+            layer.batchDraw();
+        }
 
-// Dibujar la capa
-layer.draw();
+        // Agregar eventos de arrastre a las tablas
+        tables.forEach(table => {
+            table.on('dragmove', updateLines);
+        });
+
+        // Dibujar la capa
+        layer.draw();
+    })
+    .catch(error => console.error('Error:', error));

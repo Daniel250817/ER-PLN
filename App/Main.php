@@ -1,4 +1,4 @@
-<?php include 'Extras\Functions.php'; ?>
+<?php include __DIR__ . '/Extras/Functions.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
