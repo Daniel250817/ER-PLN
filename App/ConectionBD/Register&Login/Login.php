@@ -16,13 +16,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Error de conexión: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM Usuarios WHERE NombreUsuario='$username'";
-    $result = $conn->query($sql);
-
+    $sql = "SELECT * FROM Usuarios WHERE NombreUsuario=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['Contra'])) {
-            $_SESSION['username'] = $username;
+            // Guardar información del usuario en la sesión
+            $_SESSION['user_id'] = $row['IdUsuario']; // Asumiendo que tienes un campo 'id' en tu tabla Usuarios
+            $_SESSION['username'] = $row['NombreUsuario'];
+
+            // Redirigir al usuario a la página principal
             header("Location: /App/Main.php");
             exit();
         } else {
@@ -32,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Usuario no encontrado";
     }
 
+    $stmt->close();
     $conn->close();
 }
 ?>
