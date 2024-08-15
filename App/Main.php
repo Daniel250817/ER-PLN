@@ -20,13 +20,21 @@
     
     <div class="main-content">
         <div class="Container-Left">
+        <h2>Sección izquierda</h2>
             <section class="Section-Left">
-                <h2>Sección izquierda</h2>
+                <div class="Titulo">
+                <h4>Entidades</h4>
+                </div>
+            </section>
+            <section class="Section-Left">
+            <div class="Titulo">
+                <h4>Atributos</h4>
+                </div>
             </section>
         </div>
         <div class="Container-Right">
+        <h2>Sección derecha</h2>
             <section class="Section-Right">
-                <h2>Sección derecha</h2>
                 <div id="canvas-container"></div>
             </section>
         </div> 
