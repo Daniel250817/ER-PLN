@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // Alternar el modo oscuro
 if (isset($_GET['toggle_dark_mode'])) {

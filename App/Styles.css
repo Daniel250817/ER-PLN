@@ -1,3 +1,4 @@
+/* Estilos existentes */
 h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin-left: 10px;
@@ -47,7 +48,57 @@ body.dark-mode .header {
     color: rgb(255, 255, 255);
 }
 
-.main-content{
+/* Estilos compartidos para el botón de cerrar sesión y el toggle */
+.button-style {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 15px; /* Ajusta el padding para reducir la altura */
+    font-size: 16px;
+    color: white;
+    background-color: #007BFF; /* Color inicial */
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 30px; /* Ajusta la altura */
+    line-height: 30px; /* Alinea el texto verticalmente */
+    cursor: pointer;
+}
+
+.button-style:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos específicos para el botón de cerrar sesión */
+.logout-button {
+    margin: 0;
+}
+
+/* Estilos específicos para el toggle */
+.Toogle {
+    width: fit-content;
+    float: right;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+/* Estilos para el botón de cerrar sesión en modo oscuro */
+body.dark-mode .button-style {
+    background-color: #007BFF; /* Color inicial en modo oscuro */
+    color: white;
+}
+
+body.dark-mode .button-style:hover {
+    background-color: white;
+    color: black;
+}
+
+.main-content {
     margin-top: 10px;
     display: flex; 
     height: 100dvh; 
@@ -64,7 +115,6 @@ body {
     min-height: 100vh;
 }
 
-
 .Container {
     background: var(--background-color);
 }
@@ -74,7 +124,6 @@ body {
     padding: 1px; 
     background: lightgray; 
 }
-
 
 .Container-Left {
     display: flex;
@@ -89,7 +138,6 @@ body {
     padding: 10px; 
 }
 
-
 .Section-Left {
     border: 1px solid black;  
     flex-direction: column;  
@@ -99,8 +147,6 @@ body {
     box-sizing: border-box;
     margin-bottom: 10% ;
 }
-
-
 
 .Container-Right {
     display: flex;
@@ -126,26 +172,6 @@ body {
 
 .header, footer {
     color: var(--text-color);
-}
-
-.Toogle {
-    cursor: pointer;
-    background-color: white;
-    width: fit-content;
-    color: black;
-    padding: 10px;
-    border-radius: 5px;
-    float: right;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    margin-left: auto;
-    margin-right: 10px;
-}
-
-.Toogle:hover {
-    background-color: #0088f0;
-    color: white;
 }
 
 .material-symbols-outlined {

@@ -1,4 +1,16 @@
-<?php include __DIR__ . '/Extras/Functions.php'; ?>
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    // Si no hay sesión iniciada, redirigir al usuario a la página de login
+    header("Location: /App/ConectionBD/Register&Login/Login.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+
+include __DIR__ . '/Extras/Functions.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,34 +22,41 @@
     <title>Diagram ER</title>
 </head>
 <body class="<?php echo $dark_mode ? 'dark-mode' : ''; ?>">
-    <div class="header">
+        <div class="header">
         <h1>Diagrama ER</h1>
-        <div class="Toogle" onclick="window.location.href='?toggle_dark_mode=1'">
+        <div class="Toogle button-style" onclick="window.location.href='?toggle_dark_mode=1'">
             <p>Dark Mode</p>
             <span class="material-symbols-outlined">dark_mode</span>
+        </div>
+        <div class="logout">
+            <a href="/App/ConectionBD/Register&Login/LogOut.php" class="logout-button button-style">Cerrar sesión</a>
         </div>
     </div>
     
     <div class="main-content">
         <div class="Container-Left">
-        <h2>Sección izquierda</h2>
+            <h2>Sección izquierda</h2>
             <section class="Section-Left">
                 <div class="Titulo">
-                <h4>Entidades</h4>
+                    <h4>Entidades</h4>
                 </div>
             </section>
             <section class="Section-Left">
-            <div class="Titulo">
-                <h4>Atributos</h4>
+                <div class="Titulo">
+                    <h4>Atributos</h4>
                 </div>
             </section>
         </div>
         <div class="Container-Right">
-        <h2>Sección derecha</h2>
+            <h2>Sección derecha</h2>
             <section class="Section-Right">
                 <div id="canvas-container"></div>
             </section>
         </div> 
+        <script>
+            // Pasar el ID del usuario a JavaScript
+            const userId = <?php echo json_encode($user_id); ?>;
+        </script>
         <script src="Extras/Create-Tables.js"></script>
     </div>
     
