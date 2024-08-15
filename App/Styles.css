@@ -82,7 +82,7 @@ body {
     justify-content: flex-start; 
     align-items: center; 
     height: 100dvh;
-    width: 30vw; 
+    width: 30dvh; 
     border: 1px solid black;
     box-sizing: border-box; 
     background: lightgray; 
