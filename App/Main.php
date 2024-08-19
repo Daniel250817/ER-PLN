@@ -35,25 +35,24 @@ include __DIR__ . '/Extras/Functions.php';
 
     <div class="main-content">
         <div class="Container-Left">
-            <div class="Titulo"> </div>
-                <textarea id="sql-input" placeholder="Escribe tu comando SQL para empezar a diagramar" rows="10"></textarea>
-              <button id="generate-diagram" onclick="generateERDiagram()">Generar Diagrama ER</button>
-        </div> 
-            <div id="canvas-container">
-                <canvas id="myCanvas" width="800" height="600"></canvas>
+            <textarea id="sql-input" placeholder="Escribe tu comando SQL para empezar a diagramar" rows="10"></textarea>
+            <button id="generate-diagram" onclick="generateERDiagram()">Generar Diagrama ER</button>
+        </div>
+        <div id="canvas-container">
+            <canvas id="myCanvas"></canvas>
         </div>
     </div>
     
        
     <footer>
         <div class="Footer-Container">
-            <h2>Derechos reservados</h2>
+            <p>Derechos reservados</p>
         </div>  
         <div class="Footer-copy">
-            <h4>Estudiantes / Autores</h4>
-            <h5>Julio Daniel Guardado Martínez | Wilson Alexander Portillo Marroquín</h5>
-            <h5>Manuel Alejandro Pérez Ramírez | Francisco Alexander Arbaiza Orellana</h5>
-        </div> 
+            <p>Estudiantes / Autores</p>
+            <p>Julio Daniel Guardado Martínez | Wilson Alexander Portillo Marroquín</p>
+            <p>Manuel Alejandro Pérez Ramírez | Francisco Alexander Arbaiza Orellana</p>
+        </div>
     </footer> 
 </body>
 </html>
@@ -228,16 +227,7 @@ function drawDottedLine(x1, y1, x2, y2) {
     let offsetX = 0, offsetY = 0;
     let zoom = 1;
 
-    // Dibujar algo en el canvas para la demostración
-    function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.save();
-        ctx.scale(zoom, zoom);
-        ctx.translate(offsetX, offsetY);
-        ctx.fillStyle = "red";
-        ctx.fillRect(50, 50, 200, 200);  // Ejemplo: Dibujar un cuadrado rojo
-        ctx.restore();
-    }
+    
 
     // Evento para iniciar el arrastre
     canvas.addEventListener('mousedown', (e) => {
