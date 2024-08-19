@@ -101,7 +101,8 @@ body.dark-mode .button-style:hover {
 .main-content {
     margin-top: 10px;
     display: flex; 
-    height: 100dvh; 
+    justify-content: space-between;
+    height: 70dvh; 
     width: 100vw; 
     box-sizing: border-box;
 }
@@ -130,12 +131,17 @@ body {
     flex-direction: column;
     justify-content: flex-start; 
     align-items: center; 
-    height: 100dvh;
-    width: 30dvh; 
-    border: 1px solid black;
+    height: 65dvh;
+    width: 50dvh; 
+    border-radius: 15px ;
     box-sizing: border-box; 
     background: lightgray; 
     padding: 10px; 
+    margin-left: 20px;
+    margin-top: 20px;
+    box-shadow: 5px 5px 7px rgb(122, 119, 119);
+} 
+
 }
 
 .Section-Left {
@@ -182,17 +188,77 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: black;
+    background-color: #0088f0;
     color: white;
     margin: 0px;
-    padding: 0px;
+    padding: 10px;
+}
+
+.Footer-copy {
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #0088f0;
+    color: white;
+    margin: 0px;
+    padding: 5px;
 }
 
 footer {
     width: 100%;
-    background-color: black;
+    background-color: #0088f0;
     color: white;
     text-align: center;
-    padding: 10px 0;
+    justify-content: space-between;
+    padding: 0px 0;
     margin-top: auto;
+    display: flex;
+    bottom: 0;
 }
+
+textarea {
+    resize: none;
+    text-align: fl;
+    width: 90%;
+    height: 52dvh;
+    padding-top: 30px;
+    margin-top: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    border: 1px white;
+    border-radius: 5px ;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #0088f0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+#canvas-container {
+    justify-content: flex-end;
+    width: 125dvh;
+    height: 55dvh;
+    margin-right: 85px;
+    margin-top: 50px;
+    height: 30 dvh; 
+    background-color: white;
+    background-image: radial-gradient(circle, black 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+
+canvas {
+    display: block;
+    cursor: grab; /* Muestra el cursor de arrastre dentro del canvas */
+}
+
+
+
