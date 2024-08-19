@@ -55,7 +55,7 @@ function drawDottedLine(x1, y1, x2, y2) {
 }
 
 // Obtener entidades de la base de datos
-fetch('http://localhost:3000/App/ConectionBD/Fetch/Connection.php') // Ajusta esta URL según la ubicación de tu archivo PHP
+fetch('http://localhost:3000/App/ConectionBD/Fetch/EndP_Entidades.php') // Ajusta esta URL según la ubicación de tu archivo PHP
     .then(response => response.json())
     .then(entidades => {
         var tables = [];
