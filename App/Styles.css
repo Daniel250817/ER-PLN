@@ -142,8 +142,6 @@ body {
     box-shadow: 5px 5px 7px rgb(122, 119, 119);
 } 
 
-}
-
 .Section-Left {
     border: 1px solid black;  
     flex-direction: column;  
