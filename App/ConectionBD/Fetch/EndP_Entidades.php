@@ -1,29 +1,44 @@
 <?php
-session_start(); // Inicia la sesión
+header('Content-Type: application/json');
+session_start();
+require '../db_connection.php'; // Ajusta la ruta según sea necesario
 
-include __DIR__ . '/../db_connection.php';
+$idUsuario = $_SESSION['user_id']; // Asumiendo que el ID del usuario está almacenado en la sesión
 
+// Obtener la conexión a la base de datos
 $conn = getDbConnection();
 
-// Obtén el ID del usuario logueado desde la sesión
-$user_id = $_SESSION['user_id'];
+// Verificar si la conexión se estableció correctamente
+if (!$conn) {
+    die(json_encode(['status' => 'error', 'message' => 'Error de conexión a la base de datos: ' . $conn->connect_error]));
+}
 
-$sql = "SELECT * FROM Entidades WHERE IdUsuario = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $user_id);
+// Obtener entidades y sus relaciones FK
+$query = "
+    SELECT e.IdEntidades, e.Entidades, a.IdAtributos, a.Atributos, a.IdEntidades AS FK_IdEntidades
+    FROM Entidades e
+    LEFT JOIN Atributos a ON e.IdEntidades = a.IdEntidades
+    WHERE e.IdUsuario = ? 
+";
+
+$stmt = $conn->prepare($query);
+if ($stmt === false) {
+    die(json_encode(['status' => 'error', 'message' => 'Error al preparar la consulta: ' . $conn->error]));
+}
+
+$stmt->bind_param("i", $idUsuario);
 $stmt->execute();
 $result = $stmt->get_result();
 
-$entidades = array();
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $entidades[] = $row;
-    }
+$entities = [];
+while ($row = $result->fetch_assoc()) {
+    $entities[$row['IdEntidades']]['Entidades'] = $row['Entidades'];
+    $entities[$row['IdEntidades']]['atributos'][] = [
+        'idAtributos' => $row['IdAtributos'],
+        'Atributos' => $row['Atributos'],
+        'fkIdEntidades' => $row['FK_IdEntidades']
+    ];
 }
 
-$stmt->close();
-$conn->close();
-
-header('Content-Type: application/json');
-echo json_encode($entidades);
+echo json_encode(['status' => 'success', 'data' => $entities]);
 ?>
