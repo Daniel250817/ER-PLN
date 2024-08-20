@@ -43,32 +43,6 @@ INSERT INTO `Atributos` VALUES (1,'Alumno',1);
 UNLOCK TABLES;
 
 --
--- Table structure for table `Diagrama_Entidades`
---
-
-DROP TABLE IF EXISTS `Diagrama_Entidades`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Diagrama_Entidades` (
-  `IdDiagrama` int NOT NULL,
-  `IdEntidades` int NOT NULL,
-  PRIMARY KEY (`IdDiagrama`,`IdEntidades`),
-  KEY `IdEntidades` (`IdEntidades`),
-  CONSTRAINT `Diagrama_Entidades_ibfk_1` FOREIGN KEY (`IdDiagrama`) REFERENCES `Diagramas` (`IdDiagrama`),
-  CONSTRAINT `Diagrama_Entidades_ibfk_2` FOREIGN KEY (`IdEntidades`) REFERENCES `Entidades` (`IdEntidades`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Diagrama_Entidades`
---
-
-LOCK TABLES `Diagrama_Entidades` WRITE;
-/*!40000 ALTER TABLE `Diagrama_Entidades` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Diagrama_Entidades` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Diagramas`
 --
 
@@ -79,12 +53,13 @@ CREATE TABLE `Diagramas` (
   `IdDiagrama` int NOT NULL AUTO_INCREMENT,
   `NombreDiagrama` varchar(100) DEFAULT NULL,
   `FechaCreacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `SQLDefinicion` text,
   `IdUsuario` int DEFAULT NULL,
+  `IdEntidades` int DEFAULT NULL,
   PRIMARY KEY (`IdDiagrama`),
-  KEY `IdUsuario` (`IdUsuario`),
-  CONSTRAINT `Diagramas_ibfk_1` FOREIGN KEY (`IdUsuario`) REFERENCES `Usuarios` (`IdUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_Entidades_Diagramas` (`IdUsuario`),
+  CONSTRAINT `Diagramas_ibfk_1` FOREIGN KEY (`IdUsuario`) REFERENCES `Usuarios` (`IdUsuario`),
+  CONSTRAINT `FK_Entidades_Diagramas` FOREIGN KEY (`IdUsuario`) REFERENCES `Usuarios` (`IdUsuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,6 +68,7 @@ CREATE TABLE `Diagramas` (
 
 LOCK TABLES `Diagramas` WRITE;
 /*!40000 ALTER TABLE `Diagramas` DISABLE KEYS */;
+INSERT INTO `Diagramas` VALUES (1,'Prueba 1','2024-08-20 01:00:42',1,1);
 /*!40000 ALTER TABLE `Diagramas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +86,7 @@ CREATE TABLE `Entidades` (
   PRIMARY KEY (`IdEntidades`),
   KEY `FK_Entidades_Usuarios` (`IdUsuario`),
   CONSTRAINT `FK_Entidades_Usuarios` FOREIGN KEY (`IdUsuario`) REFERENCES `Usuarios` (`IdUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +95,7 @@ CREATE TABLE `Entidades` (
 
 LOCK TABLES `Entidades` WRITE;
 /*!40000 ALTER TABLE `Entidades` DISABLE KEYS */;
-INSERT INTO `Entidades` VALUES (1,'Entidad 1',1),(3,'Entidad 2',3),(4,'Entidad 3',2),(5,'Entidad 4',NULL),(6,'Entidad 5',NULL);
+INSERT INTO `Entidades` VALUES (1,'Entidad 1',1),(3,'Entidad 2',3),(4,'Entidad 3',2),(5,'Entidad 4',NULL),(6,'Entidad 5',NULL),(7,'Wilson',1),(8,'Wilson',1);
 /*!40000 ALTER TABLE `Entidades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,4 +137,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-18 22:59:20
+-- Dump completed on 2024-08-19 23:47:28
